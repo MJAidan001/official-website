@@ -1,0 +1,12 @@
+{
+  "name": "taiyi-tech-website",
+  "version": "1.0.0",
+  "description": "太一科技官方网站",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "watch": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.0"
+  }
+} 
