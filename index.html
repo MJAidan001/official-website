@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' *.cloudflare.com fonts.googleapis.com fonts.gstatic.com cdn.tailwindcss.com cdn.jsdelivr.net; img-src 'self' data: https:; font-src 'self' fonts.gstatic.com fonts.googleapis.com; style-src 'self' 'unsafe-inline' cdn.tailwindcss.com cdnjs.cloudflare.com fonts.googleapis.com fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.tailwindcss.com cdn.jsdelivr.net cdnjs.cloudflare.com; connect-src 'self' https:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; font-src 'self' https: fonts.gstatic.com fonts.googleapis.com; img-src 'self' data: https: images.unsplash.com; style-src 'self' 'unsafe-inline' https: fonts.googleapis.com; script-src 'self' 'unsafe-inline' https: cdn.jsdelivr.net cdnjs.cloudflare.com;">
     <title>太一科技 - 情感化AI智能体领导者</title>
     <meta name="description" content="上海太一智枢科技发展有限公司 - 专注情感化AI智能体开发，让AI更懂人心">
     <meta name="keywords" content="AI智能体,情感计算,人工智能,机器学习,深度学习,上海太一科技">
@@ -19,6 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
 </head>
 <body class="bg-black text-white overflow-x-hidden">
     <!-- 滚动进度条 -->
@@ -149,7 +150,7 @@
     <section class="hero-section min-h-screen flex items-center justify-center relative overflow-hidden" style="padding-top: 100px;">
         <!-- 动态背景 -->
         <div class="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-purple-900/30 to-black"></div>
-        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-15"></div>
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-15"></div>
         
         <!-- 粒子效果背景 -->
         <div class="absolute inset-0">
@@ -232,7 +233,7 @@
 
     <!-- 公司概况 -->
     <section id="about" class="py-32 bg-gradient-to-b from-black via-gray-900 to-gray-800 relative">
-        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-5"></div>
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-5"></div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <div class="fade-in">
@@ -297,7 +298,7 @@
 
     <!-- 核心业务 -->
     <section id="products" class="py-32 bg-gray-800 relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-5"></div>
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-5"></div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-20 fade-in">
                 <span class="section-badge">Our Services</span>
@@ -312,10 +313,16 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <div class="service-card group fade-in">
                     <div class="service-icon-wrapper">
-                        <div class="service-icon bg-gradient-to-r from-blue-500 to-blue-600">
+                        <!-- <div class="service-icon bg-gradient-to-r from-blue-500 to-blue-600">
                             <i class="fas fa-brain text-2xl text-white"></i>
-                        </div>
+                        </div> -->
                         <div class="service-icon-bg bg-blue-500/20"></div>
+                    </div>
+                    <div class="service-image mb-6">
+                        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=600&q=80" 
+                             alt="情感化AI智能体" 
+                             class="w-full h-48 object-cover rounded-lg"
+                             loading="lazy">
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-blue-400 transition-colors">情感化AI智能体</h3>
                     <p class="text-gray-300 mb-8 leading-relaxed">
@@ -340,10 +347,16 @@
                 
                 <div class="service-card group fade-in delay-100">
                     <div class="service-icon-wrapper">
-                        <div class="service-icon bg-gradient-to-r from-purple-500 to-purple-600">
+                        <!-- <div class="service-icon bg-gradient-to-r from-purple-500 to-purple-600">
                             <i class="fas fa-industry text-2xl text-white"></i>
-                        </div>
+                        </div> -->
                         <div class="service-icon-bg bg-purple-500/20"></div>
+                    </div>
+                    <div class="service-image mb-6">
+                        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=600&q=80" 
+                             alt="行业解决方案" 
+                             class="w-full h-48 object-cover rounded-lg"
+                             loading="lazy">
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-purple-400 transition-colors">行业解决方案</h3>
                     <p class="text-gray-300 mb-8 leading-relaxed">
@@ -368,10 +381,16 @@
                 
                 <div class="service-card group fade-in delay-200">
                     <div class="service-icon-wrapper">
-                        <div class="service-icon bg-gradient-to-r from-green-500 to-green-600">
+                        <!-- <div class="service-icon bg-gradient-to-r from-green-500 to-green-600">
                             <i class="fas fa-network-wired text-2xl text-white"></i>
-                        </div>
+                        </div> -->
                         <div class="service-icon-bg bg-green-500/20"></div>
+                    </div>
+                    <div class="service-image mb-6">
+                        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=600&q=80" 
+                             alt="生态共建" 
+                             class="w-full h-48 object-cover rounded-lg"
+                             loading="lazy">
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-green-400 transition-colors">生态共建</h3>
                     <p class="text-gray-300 mb-8 leading-relaxed">
@@ -414,7 +433,7 @@
                 <!-- 教育行业 -->
                 <div class="solution-card fade-in">
                     <div class="solution-image">
-                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80" 
+                        <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=600&q=80" 
                              alt="教育AI解决方案" 
                              class="w-full h-64 object-cover"
                              loading="lazy">
@@ -440,7 +459,7 @@
                 <!-- 医疗行业 -->
                 <div class="solution-card fade-in delay-100">
                     <div class="solution-image">
-                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?auto=format&fit=crop&w=600&q=80" 
+                        <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=600&q=80" 
                              alt="医疗AI解决方案" 
                              class="w-full h-64 object-cover"
                              loading="lazy">
@@ -466,7 +485,7 @@
                 <!-- 心理咨询 -->
                 <div class="solution-card fade-in delay-200">
                     <div class="solution-image">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" 
+                        <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=600&q=80" 
                              alt="心理咨询AI解决方案" 
                              class="w-full h-64 object-cover"
                              loading="lazy">
@@ -549,7 +568,7 @@
                     <!-- 智能戒指 -->
                     <div class="product-card fade-in cursor-pointer" data-product-id="ring-001" data-category="wearable health">
                         <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?auto=format&fit=crop&w=600&q=80" 
+                            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" 
                                  alt="太一智能戒指" 
                                  class="w-full h-48 object-cover"
                                  loading="lazy">
@@ -588,7 +607,7 @@
                     <!-- 智能手环 -->
                     <div class="product-card fade-in delay-100 cursor-pointer" data-product-id="band-001" data-category="wearable health">
                         <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&w=600&q=80" 
+                            <img src="https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&w=600&q=80" 
                                  alt="太一智能手环Pro" 
                                  class="w-full h-48 object-cover"
                                  loading="lazy">
@@ -628,7 +647,7 @@
                     <!-- 智能手表 -->
                     <div class="product-card fade-in delay-200 cursor-pointer" data-product-id="watch-001" data-category="wearable professional">
                         <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" 
+                            <img src="https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&w=600&q=80" 
                                  alt="太一智能手表X1" 
                                  class="w-full h-48 object-cover"
                                  loading="lazy">
@@ -667,7 +686,7 @@
                     <!-- 智能耳机 -->
                     <div class="product-card fade-in delay-300 cursor-pointer" data-product-id="earphone-001" data-category="entertainment wearable">
                         <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80" 
+                            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80" 
                                  alt="太一智能耳机S3" 
                                  class="w-full h-48 object-cover"
                                  loading="lazy">
@@ -709,7 +728,7 @@
                     <!-- 智能项链 -->
                     <div class="product-card fade-in cursor-pointer" data-product-id="necklace-001" data-category="fashion wearable">
                         <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80" 
+                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80" 
                                  alt="太一智能项链" 
                                  class="w-full h-48 object-cover"
                                  loading="lazy">
@@ -748,7 +767,7 @@
                     <!-- 智能眼镜 -->
                     <div class="product-card fade-in delay-100 cursor-pointer" data-product-id="glasses-001" data-category="professional entertainment">
                         <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?auto=format&fit=crop&w=600&q=80" 
+                            <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80" 
                                  alt="太一智能眼镜AR" 
                                  class="w-full h-48 object-cover"
                                  loading="lazy">
@@ -787,7 +806,7 @@
                     <!-- 智能手套 -->
                     <div class="product-card fade-in delay-200 cursor-pointer" data-product-id="glove-001" data-category="professional entertainment">
                         <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=600&q=80" 
+                            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" 
                                  alt="太一智能手套VR" 
                                  class="w-full h-48 object-cover"
                                  loading="lazy">
