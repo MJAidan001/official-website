@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - 太一科技</title>
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-black text-white overflow-x-hidden">
+    <!-- 导航栏 -->
+    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    太一科技
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="hover:text-blue-400 transition-all duration-300">首页</a>
+                    <a href="products.html" class="hover:text-blue-400 transition-all duration-300">产品商城</a>
+                    <a href="orders.html" class="hover:text-blue-400 transition-all duration-300">我的订单</a>
+                    <a href="index.html#contact" class="hover:text-blue-400 transition-all duration-300">联系我们</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-300 text-sm">欢迎，<span id="currentUserName">用户</span></span>
+                    <button id="logoutBtn" class="text-red-400 hover:text-red-300 transition-colors">
+                        <i class="fas fa-sign-out-alt mr-1"></i>退出
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="pt-24 pb-4 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <nav class="flex items-center space-x-2 text-sm text-gray-400">
+                <a href="index.html" class="hover:text-blue-400 transition-colors">首页</a>
+                <i class="fas fa-chevron-right text-xs"></i>
+                <span class="text-white">个人中心</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- 个人中心主内容 -->
+    <section class="py-16 bg-gradient-to-b from-gray-900 via-black to-gray-900 relative">
+        <div class="container mx-auto px-6 relative z-10">
+            
+            <!-- 页面标题 -->
+            <div class="text-center mb-12 fade-in">
+                <h1 class="text-4xl font-bold text-white mb-4">个人中心</h1>
+                <p class="text-gray-400">管理您的账户信息和偏好设置</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                
+                <!-- 左侧导航菜单 -->
+                <div class="lg:col-span-1">
+                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700 sticky top-24 fade-in">
+                        <div class="text-center mb-6">
+                            <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-user text-3xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white" id="profileUserName">用户名</h3>
+                            <p class="text-gray-400 text-sm" id="userEmail">user@example.com</p>
+                        </div>
+                        
+                        <nav class="space-y-2">
+                            <button class="profile-nav-btn active w-full text-left" data-tab="info">
+                                <i class="fas fa-user mr-3"></i>个人信息
+                            </button>
+                            <button class="profile-nav-btn w-full text-left" data-tab="security">
+                                <i class="fas fa-shield-alt mr-3"></i>账户安全
+                            </button>
+                            <button class="profile-nav-btn w-full text-left" data-tab="preferences">
+                                <i class="fas fa-cog mr-3"></i>偏好设置
+                            </button>
+                            <button class="profile-nav-btn w-full text-left" data-tab="address">
+                                <i class="fas fa-map-marker-alt mr-3"></i>收货地址
+                            </button>
+                            <a href="orders.html" class="profile-nav-btn w-full text-left block">
+                                <i class="fas fa-shopping-cart mr-3"></i>我的订单
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- 右侧内容区域 -->
+                <div class="lg:col-span-3">
+                    
+                    <!-- 个人信息标签页 -->
+                    <div id="info-tab" class="tab-content active">
+                        <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 fade-in">
+                            <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                                <i class="fas fa-user mr-3 text-blue-400"></i>
+                                个人信息
+                            </h2>
+                            
+                            <form id="profileForm" class="space-y-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-300 mb-2">姓名 *</label>
+                                        <input type="text" id="fullName" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-500" placeholder="请输入您的姓名">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-300 mb-2">手机号码 *</label>
+                                        <input type="tel" id="phoneNumber" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-500" placeholder="请输入手机号码">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-300 mb-2">邮箱地址 *</label>
+                                    <input type="email" id="emailAddress" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-500" placeholder="请输入邮箱地址">
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-300 mb-2">生日</label>
+                                        <input type="date" id="birthday" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:outline-none focus:border-blue-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-300 mb-2">性别</label>
+                                        <select id="gender" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:outline-none focus:border-blue-500">
+                                            <option value="">请选择</option>
+                                            <option value="male">男</option>
+                                            <option value="female">女</option>
+                                            <option value="other">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-300 mb-2">个人简介</label>
+                                    <textarea id="biography" rows="4" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 resize-none" placeholder="介绍一下您自己..."></textarea>
+                                </div>
+                                
+                                <div class="flex justify-end space-x-4">
+                                    <button type="button" class="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition-all duration-300">
+                                        取消
+                                    </button>
+                                    <button type="submit" class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-xl transition-all duration-300">
+                                        保存更改
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- 账户安全标签页 -->
+                    <div id="security-tab" class="tab-content">
+                        <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 fade-in">
+                            <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                                <i class="fas fa-shield-alt mr-3 text-green-400"></i>
+                                账户安全
+                            </h2>
+                            
+                            <div class="space-y-8">
+                                <!-- 修改密码 -->
+                                <div class="border border-gray-600 rounded-xl p-6">
+                                    <h3 class="text-lg font-semibold text-white mb-4">修改密码</h3>
+                                    <form id="passwordForm" class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-300 mb-2">当前密码</label>
+                                            <input type="password" id="currentPassword" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-500" placeholder="请输入当前密码">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-300 mb-2">新密码</label>
+                                            <input type="password" id="newPassword" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-500" placeholder="请输入新密码">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-300 mb-2">确认新密码</label>
+                                            <input type="password" id="confirmPassword" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-500" placeholder="请再次输入新密码">
+                                        </div>
+                                        <button type="submit" class="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-xl transition-all duration-300">
+                                            更新密码
+                                        </button>
+                                    </form>
+                                </div>
+                                
+                                <!-- 两步验证 -->
+                                <div class="border border-gray-600 rounded-xl p-6">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-white">两步验证</h3>
+                                            <p class="text-gray-400 text-sm">为您的账户增加额外的安全保护</p>
+                                        </div>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" id="twoFactorAuth" class="sr-only peer">
+                                            <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                        </label>
+                                    </div>
+                                    <p class="text-gray-400 text-sm">启用后，登录时需要输入短信验证码</p>
+                                </div>
+                                
+                                <!-- 登录记录 -->
+                                <div class="border border-gray-600 rounded-xl p-6">
+                                    <h3 class="text-lg font-semibold text-white mb-4">最近登录记录</h3>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between py-3 border-b border-gray-700">
+                                            <div>
+                                                <p class="text-white font-medium">当前设备</p>
+                                                <p class="text-gray-400 text-sm">Chrome浏览器 · Windows</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-green-400 text-sm">在线</p>
+                                                <p class="text-gray-400 text-xs">IP: 192.168.1.100</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between py-3 border-b border-gray-700">
+                                            <div>
+                                                <p class="text-white font-medium">手机设备</p>
+                                                <p class="text-gray-400 text-sm">Safari浏览器 · iOS</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-gray-400 text-sm">2小时前</p>
+                                                <p class="text-gray-400 text-xs">IP: 192.168.1.101</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 偏好设置标签页 -->
+                    <div id="preferences-tab" class="tab-content">
+                        <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 fade-in">
+                            <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                                <i class="fas fa-cog mr-3 text-purple-400"></i>
+                                偏好设置
+                            </h2>
+                            
+                            <div class="space-y-8">
+                                <!-- 通知设置 -->
+                                <div class="border border-gray-600 rounded-xl p-6">
+                                    <h3 class="text-lg font-semibold text-white mb-4">通知设置</h3>
+                                    <div class="space-y-4">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-white font-medium">邮件通知</p>
+                                                <p class="text-gray-400 text-sm">接收订单状态和产品更新邮件</p>
+                                            </div>
+                                            <label class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" id="emailNotifications" class="sr-only peer" checked>
+                                                <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                            </label>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-white font-medium">短信通知</p>
+                                                <p class="text-gray-400 text-sm">接收重要订单和物流信息</p>
+                                            </div>
+                                            <label class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" id="smsNotifications" class="sr-only peer" checked>
+                                                <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                            </label>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-white font-medium">营销推送</p>
+                                                <p class="text-gray-400 text-sm">接收优惠活动和新品推荐</p>
+                                            </div>
+                                            <label class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" id="marketingNotifications" class="sr-only peer">
+                                                <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 隐私设置 -->
+                                <!-- <div class="border border-gray-600 rounded-xl p-6">
+                                    <h3 class="text-lg font-semibold text-white mb-4">隐私设置</h3>
+                                    <div class="space-y-4">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-white font-medium">个人资料公开</p>
+                                                <p class="text-gray-400 text-sm">允许其他用户查看您的基本信息</p>
+                                            </div>
+                                            <label class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" id="profileVisibility" class="sr-only peer">
+                                                <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                            </label>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <p class="text-white font-medium">数据分析</p>
+                                                <p class="text-gray-400 text-sm">允许我们分析您的使用习惯以改善服务</p>
+                                            </div>
+                                            <label class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" id="dataAnalytics" class="sr-only peer" checked>
+                                                <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 收货地址标签页 -->
+                    <div id="address-tab" class="tab-content">
+                        <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 fade-in">
+                            <div class="flex items-center justify-between mb-6">
+                                <h2 class="text-2xl font-bold text-white flex items-center">
+                                    <i class="fas fa-map-marker-alt mr-3 text-red-400"></i>
+                                    收货地址
+                                </h2>
+                                <button id="addAddressBtn" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-xl transition-all duration-300">
+                                    <i class="fas fa-plus mr-2"></i>新增地址
+                                </button>
+                            </div>
+                            
+                            <div id="addressList" class="space-y-4">
+                                <!-- 默认地址 -->
+                                <div class="border border-gray-600 rounded-xl p-6">
+                                    <div class="flex items-start justify-between">
+                                        <div class="flex-1">
+                                            <div class="flex items-center mb-2">
+                                                <span class="font-semibold text-white mr-3">张三</span>
+                                                <span class="text-gray-300">173****0587</span>
+                                                <span class="bg-red-500 text-white text-xs px-2 py-1 rounded-full ml-3">默认</span>
+                                            </div>
+                                            <p class="text-gray-300 leading-relaxed mb-2">
+                                                江苏省常州市武进区太湖时代34号
+                                            </p>
+                                            <p class="text-gray-400 text-sm">
+                                                1731524717015871359307@qq.com
+                                            </p>
+                                        </div>
+                                        <div class="flex space-x-2 ml-4">
+                                            <button class="text-blue-400 hover:text-blue-300 px-3 py-1 text-sm">
+                                                <i class="fas fa-edit mr-1"></i>编辑
+                                            </button>
+                                            <button class="text-red-400 hover:text-red-300 px-3 py-1 text-sm">
+                                                <i class="fas fa-trash mr-1"></i>删除
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 其他地址 -->
+                                <div class="border border-gray-600 rounded-xl p-6">
+                                    <div class="flex items-start justify-between">
+                                        <div class="flex-1">
+                                            <div class="flex items-center mb-2">
+                                                <span class="font-semibold text-white mr-3">张三</span>
+                                                <span class="text-gray-300">173****0587</span>
+                                            </div>
+                                            <p class="text-gray-300 leading-relaxed mb-2">
+                                                上海市普陀区科技创新园A座15楼太一科技
+                                            </p>
+                                        </div>
+                                        <div class="flex space-x-2 ml-4">
+                                            <button class="text-blue-400 hover:text-blue-300 px-3 py-1 text-sm">
+                                                <i class="fas fa-edit mr-1"></i>编辑
+                                            </button>
+                                            <button class="text-red-400 hover:text-red-300 px-3 py-1 text-sm">
+                                                <i class="fas fa-trash mr-1"></i>删除
+                                            </button>
+                                            <button class="text-gray-400 hover:text-white px-3 py-1 text-sm">
+                                                <i class="fas fa-star mr-1"></i>设为默认
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-16 bg-gradient-to-b from-gray-900 to-black border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <div class="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    太一科技
+                </div>
+                <p class="text-gray-400 mb-6">
+                    致力于通过技术创新让AI从"高性能的工具"升级为"有情感的伙伴"。
+                </p>
+                <p class="text-gray-400">
+                    © 2025 上海太一智枢科技发展有限公司. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 新增/编辑地址模态框 -->
+    <div id="addressModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center">
+        <div class="bg-gray-800 rounded-xl p-8 w-full max-w-md mx-4 border border-gray-700">
+            <div class="flex items-center justify-between mb-6">
+                <h3 id="modalTitle" class="text-xl font-bold text-white">新增收货地址</h3>
+                <button id="closeModal" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <form id="addressForm">
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">收货人 *</label>
+                            <input type="text" id="recipientName" required class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-500" placeholder="请输入收货人姓名">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">联系电话 *</label>
+                            <input type="tel" id="recipientPhone" required class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-500" placeholder="手机号码">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">省份 *</label>
+                            <select id="province" required class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:outline-none focus:border-blue-500">
+                                <option value="">请选择</option>
+                                <option value="江苏省">江苏省</option>
+                                <option value="上海市">上海市</option>
+                                <option value="北京市">北京市</option>
+                                <option value="广东省">广东省</option>
+                                <option value="浙江省">浙江省</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">城市 *</label>
+                            <select id="city" required class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:outline-none focus:border-blue-500">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">区县 *</label>
+                            <select id="district" required class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:outline-none focus:border-blue-500">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">详细地址 *</label>
+                        <textarea id="detailedAddress" required rows="3" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 resize-none" placeholder="请输入详细地址，如街道、楼牌号等"></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">邮箱（可选）</label>
+                        <input type="email" id="recipientEmail" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-500" placeholder="邮箱地址">
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="isDefault" class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500">
+                        <label for="isDefault" class="ml-2 text-sm text-gray-300">设为默认地址</label>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end space-x-4 mt-8">
+                    <button type="button" id="cancelBtn" class="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-xl transition-all duration-300">
+                        取消
+                    </button>
+                    <button type="submit" class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-xl transition-all duration-300">
+                        保存地址
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 自定义脚本 -->
+    <script src="script.js"></script>
+    <script>
+        // 个人中心页面专用脚本
+        document.addEventListener('DOMContentLoaded', function() {
+            // 检查登录状态
+            if (!isUserLoggedIn()) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            initProfilePage();
+        });
+
+        function initProfilePage() {
+            // 加载用户信息
+            loadUserInfo();
+            
+            // 初始化标签页切换
+            initTabSwitching();
+            
+            // 初始化表单处理
+            initFormHandlers();
+            
+            // 初始化退出登录
+            initLogout();
+            
+            // 初始化地址管理
+            initAddressManagement();
+        }
+
+        // 加载用户信息
+        function loadUserInfo() {
+            const userName = getCurrentUserName();
+            const userEmail = localStorage.getItem('userEmail') || '123@qq.com';
+            
+            document.getElementById('currentUserName').textContent = userName;
+            document.getElementById('profileUserName').textContent = userName;
+            
+            // 加载用户详细信息
+            document.getElementById('fullName').value = userName;
+            document.getElementById('emailAddress').value = userEmail;
+            document.getElementById('userEmail').textContent = userEmail;
+            
+            // 如果是默认账号，可以预填一些示例信息
+            if (userEmail === '123@qq.com') {
+                document.getElementById('phoneNumber').value = '173****0587';
+                document.getElementById('birthday').value = '1990-01-01';
+                document.getElementById('gender').value = 'male';
+                document.getElementById('biography').value = '太一科技的忠实用户，热爱AI科技产品。';
+            }
+        }
+
+        // 初始化标签页切换
+        function initTabSwitching() {
+            const navBtns = document.querySelectorAll('.profile-nav-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            navBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.dataset.tab;
+                    
+                    // 更新导航按钮状态
+                    navBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 切换标签页内容
+                    tabContents.forEach(tab => {
+                        tab.classList.remove('active');
+                        if (tab.id === tabId + '-tab') {
+                            tab.classList.add('active');
+                        }
+                    });
+                });
+            });
+        }
+
+        // 初始化表单处理
+        function initFormHandlers() {
+            // 个人信息表单
+            const profileForm = document.getElementById('profileForm');
+            profileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (typeof showNotification === 'function') {
+                    showNotification('个人信息更新成功！', 'success');
+                }
+            });
+            
+            // 密码修改表单
+            const passwordForm = document.getElementById('passwordForm');
+            passwordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                if (newPassword !== confirmPassword) {
+                    if (typeof showNotification === 'function') {
+                        showNotification('两次输入的密码不一致！', 'error');
+                    }
+                    return;
+                }
+                
+                if (typeof showNotification === 'function') {
+                    showNotification('密码修改成功！', 'success');
+                }
+                
+                // 清空表单
+                this.reset();
+            });
+        }
+
+        // 初始化退出登录
+        function initLogout() {
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (typeof handleLogout === 'function') {
+                        handleLogout(e);
+                    }
+                });
+            }
+        }
+
+        // 地址管理相关变量
+        let currentEditingAddressId = null;
+        let addresses = [];
+
+        // 初始化地址管理功能
+        function initAddressManagement() {
+            // 加载地址数据
+            loadAddresses();
+            
+            // 绑定新增地址按钮
+            document.getElementById('addAddressBtn').addEventListener('click', openAddressModal);
+            
+            // 绑定模态框关闭按钮
+            document.getElementById('closeModal').addEventListener('click', closeAddressModal);
+            document.getElementById('cancelBtn').addEventListener('click', closeAddressModal);
+            
+            // 绑定地址表单提交
+            document.getElementById('addressForm').addEventListener('submit', handleAddressFormSubmit);
+            
+            // 初始化省市区联动
+            initRegionSelector();
+            
+            // 点击模态框外部关闭
+            document.getElementById('addressModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeAddressModal();
+                }
+            });
+        }
+
+        // 加载地址数据
+        function loadAddresses() {
+            // 从本地存储获取地址数据，如果没有则使用默认数据
+            const savedAddresses = localStorage.getItem('userAddresses');
+            if (savedAddresses) {
+                addresses = JSON.parse(savedAddresses);
+            } else {
+                // 初始化默认地址数据
+                addresses = [
+                    {
+                        id: 'addr_1',
+                        recipientName: '张三',
+                        recipientPhone: '173****0587',
+                        province: '江苏省',
+                        city: '常州市',
+                        district: '武进区',
+                        detailedAddress: '太湖时代34号',
+                        recipientEmail: '1731524717015871359307@qq.com',
+                        isDefault: true
+                    },
+                    {
+                        id: 'addr_2',
+                        recipientName: '张三',
+                        recipientPhone: '173****0587',
+                        province: '上海市',
+                        city: '上海市',
+                        district: '普陀区',
+                        detailedAddress: '科技创新园A座15楼太一科技',
+                        recipientEmail: '',
+                        isDefault: false
+                    }
+                ];
+                saveAddresses();
+            }
+            
+            renderAddressList();
+        }
+
+        // 保存地址数据到本地存储
+        function saveAddresses() {
+            localStorage.setItem('userAddresses', JSON.stringify(addresses));
+        }
+
+        // 渲染地址列表
+        function renderAddressList() {
+            const addressList = document.getElementById('addressList');
+            addressList.innerHTML = '';
+            
+            addresses.forEach(address => {
+                const addressCard = createAddressCard(address);
+                addressList.appendChild(addressCard);
+            });
+        }
+
+        // 创建地址卡片
+        function createAddressCard(address) {
+            const div = document.createElement('div');
+            div.className = 'border border-gray-600 rounded-xl p-6';
+            div.innerHTML = `
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <div class="flex items-center mb-2">
+                            <span class="font-semibold text-white mr-3">${address.recipientName}</span>
+                            <span class="text-gray-300">${address.recipientPhone}</span>
+                            ${address.isDefault ? '<span class="bg-red-500 text-white text-xs px-2 py-1 rounded-full ml-3">默认</span>' : ''}
+                        </div>
+                        <p class="text-gray-300 leading-relaxed mb-2">
+                            ${address.province}${address.city}${address.district}${address.detailedAddress}
+                        </p>
+                        ${address.recipientEmail ? `<p class="text-gray-400 text-sm">${address.recipientEmail}</p>` : ''}
+                    </div>
+                    <div class="flex space-x-2 ml-4">
+                        <button class="edit-address-btn text-blue-400 hover:text-blue-300 px-3 py-1 text-sm" data-id="${address.id}">
+                            <i class="fas fa-edit mr-1"></i>编辑
+                        </button>
+                        <button class="delete-address-btn text-red-400 hover:text-red-300 px-3 py-1 text-sm" data-id="${address.id}">
+                            <i class="fas fa-trash mr-1"></i>删除
+                        </button>
+                        ${!address.isDefault ? `<button class="set-default-btn text-gray-400 hover:text-white px-3 py-1 text-sm" data-id="${address.id}">
+                            <i class="fas fa-star mr-1"></i>设为默认
+                        </button>` : ''}
+                    </div>
+                </div>
+            `;
+            
+            // 绑定按钮事件
+            div.querySelector('.edit-address-btn').addEventListener('click', () => editAddress(address.id));
+            div.querySelector('.delete-address-btn').addEventListener('click', () => deleteAddress(address.id));
+            
+            const setDefaultBtn = div.querySelector('.set-default-btn');
+            if (setDefaultBtn) {
+                setDefaultBtn.addEventListener('click', () => setDefaultAddress(address.id));
+            }
+            
+            return div;
+        }
+
+        // 打开地址模态框（新增或编辑）
+        function openAddressModal(addressId = null) {
+            const modal = document.getElementById('addressModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const form = document.getElementById('addressForm');
+            
+            // 重置表单
+            form.reset();
+            currentEditingAddressId = addressId;
+            
+            if (addressId) {
+                // 编辑模式
+                modalTitle.textContent = '编辑收货地址';
+                const address = addresses.find(addr => addr.id === addressId);
+                if (address) {
+                    fillAddressForm(address);
+                }
+            } else {
+                // 新增模式
+                modalTitle.textContent = '新增收货地址';
+            }
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        // 关闭地址模态框
+        function closeAddressModal() {
+            const modal = document.getElementById('addressModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            currentEditingAddressId = null;
+        }
+
+        // 填充地址表单（编辑时使用）
+        function fillAddressForm(address) {
+            document.getElementById('recipientName').value = address.recipientName;
+            document.getElementById('recipientPhone').value = address.recipientPhone;
+            document.getElementById('province').value = address.province;
+            document.getElementById('detailedAddress').value = address.detailedAddress;
+            document.getElementById('recipientEmail').value = address.recipientEmail || '';
+            document.getElementById('isDefault').checked = address.isDefault;
+            
+            // 触发省份变化以加载城市
+            setTimeout(() => {
+                document.getElementById('city').value = address.city;
+                // 触发城市变化以加载区县
+                setTimeout(() => {
+                    document.getElementById('district').value = address.district;
+                }, 100);
+            }, 100);
+        }
+
+        // 处理地址表单提交
+        function handleAddressFormSubmit(e) {
+            e.preventDefault();
+            
+            const formData = {
+                recipientName: document.getElementById('recipientName').value,
+                recipientPhone: document.getElementById('recipientPhone').value,
+                province: document.getElementById('province').value,
+                city: document.getElementById('city').value,
+                district: document.getElementById('district').value,
+                detailedAddress: document.getElementById('detailedAddress').value,
+                recipientEmail: document.getElementById('recipientEmail').value,
+                isDefault: document.getElementById('isDefault').checked
+            };
+            
+            // 验证手机号
+            if (!isValidPhone(formData.recipientPhone.replace(/\*/g, '1'))) {
+                if (typeof showNotification === 'function') {
+                    showNotification('请输入有效的手机号码！', 'error');
+                }
+                return;
+            }
+            
+            if (currentEditingAddressId) {
+                // 编辑模式
+                updateAddress(currentEditingAddressId, formData);
+            } else {
+                // 新增模式
+                addNewAddress(formData);
+            }
+        }
+
+        // 新增地址
+        function addNewAddress(addressData) {
+            const newAddress = {
+                id: 'addr_' + Date.now(),
+                ...addressData
+            };
+            
+            // 如果设为默认，取消其他地址的默认状态
+            if (newAddress.isDefault) {
+                addresses.forEach(addr => addr.isDefault = false);
+            }
+            
+            addresses.push(newAddress);
+            saveAddresses();
+            renderAddressList();
+            closeAddressModal();
+            
+            if (typeof showNotification === 'function') {
+                showNotification('地址添加成功！', 'success');
+            }
+        }
+
+        // 更新地址
+        function updateAddress(addressId, addressData) {
+            const index = addresses.findIndex(addr => addr.id === addressId);
+            if (index > -1) {
+                // 如果设为默认，取消其他地址的默认状态
+                if (addressData.isDefault) {
+                    addresses.forEach(addr => addr.isDefault = false);
+                }
+                
+                addresses[index] = { ...addresses[index], ...addressData };
+                saveAddresses();
+                renderAddressList();
+                closeAddressModal();
+                
+                if (typeof showNotification === 'function') {
+                    showNotification('地址更新成功！', 'success');
+                }
+            }
+        }
+
+        // 编辑地址
+        function editAddress(addressId) {
+            openAddressModal(addressId);
+        }
+
+        // 删除地址
+        function deleteAddress(addressId) {
+            if (confirm('确定要删除这个地址吗？')) {
+                const index = addresses.findIndex(addr => addr.id === addressId);
+                if (index > -1) {
+                    const wasDefault = addresses[index].isDefault;
+                    addresses.splice(index, 1);
+                    
+                    // 如果删除的是默认地址，设置第一个地址为默认
+                    if (wasDefault && addresses.length > 0) {
+                        addresses[0].isDefault = true;
+                    }
+                    
+                    saveAddresses();
+                    renderAddressList();
+                    
+                    if (typeof showNotification === 'function') {
+                        showNotification('地址删除成功！', 'success');
+                    }
+                }
+            }
+        }
+
+        // 设为默认地址
+        function setDefaultAddress(addressId) {
+            // 取消所有地址的默认状态
+            addresses.forEach(addr => addr.isDefault = false);
+            
+            // 设置指定地址为默认
+            const index = addresses.findIndex(addr => addr.id === addressId);
+            if (index > -1) {
+                addresses[index].isDefault = true;
+                saveAddresses();
+                renderAddressList();
+                
+                if (typeof showNotification === 'function') {
+                    showNotification('已设为默认地址！', 'success');
+                }
+            }
+        }
+
+        // 初始化省市区联动
+        function initRegionSelector() {
+            const regionData = {
+                '江苏省': {
+                    '常州市': ['武进区', '天宁区', '钟楼区', '新北区', '金坛区', '溧阳市'],
+                    '南京市': ['玄武区', '秦淮区', '建邺区', '鼓楼区', '浦口区', '栖霞区', '雨花台区', '江宁区', '六合区', '溧水区', '高淳区'],
+                    '苏州市': ['姑苏区', '虎丘区', '吴中区', '相城区', '吴江区', '昆山市', '太仓市', '常熟市', '张家港市']
+                },
+                '上海市': {
+                    '上海市': ['黄浦区', '徐汇区', '长宁区', '静安区', '普陀区', '虹口区', '杨浦区', '闵行区', '宝山区', '嘉定区', '浦东新区', '金山区', '松江区', '青浦区', '奉贤区', '崇明区']
+                },
+                '北京市': {
+                    '北京市': ['东城区', '西城区', '朝阳区', '丰台区', '石景山区', '海淀区', '门头沟区', '房山区', '通州区', '顺义区', '昌平区', '大兴区', '怀柔区', '平谷区', '密云区', '延庆区']
+                },
+                '广东省': {
+                    '广州市': ['荔湾区', '越秀区', '海珠区', '天河区', '白云区', '黄埔区', '番禺区', '花都区', '南沙区', '从化区', '增城区'],
+                    '深圳市': ['罗湖区', '福田区', '南山区', '宝安区', '龙岗区', '盐田区', '龙华区', '坪山区', '光明区', '大鹏新区'],
+                    '东莞市': ['莞城区', '南城区', '东城区', '万江区', '石碣镇', '石龙镇', '茶山镇', '石排镇', '企石镇', '横沥镇', '桥头镇', '谢岗镇', '东坑镇', '常平镇', '寮步镇', '樟木头镇', '大朗镇', '黄江镇', '清溪镇', '塘厦镇', '凤岗镇', '大岭山镇', '长安镇', '虎门镇', '厚街镇', '沙田镇', '道滘镇', '洪梅镇', '麻涌镇', '望牛墩镇', '中堂镇', '高埗镇']
+                },
+                '浙江省': {
+                    '杭州市': ['上城区', '下城区', '江干区', '拱墅区', '西湖区', '滨江区', '萧山区', '余杭区', '富阳区', '临安区', '桐庐县', '淳安县', '建德市'],
+                    '宁波市': ['海曙区', '江北区', '北仑区', '镇海区', '鄞州区', '奉化区', '象山县', '宁海县', '余姚市', '慈溪市'],
+                    '温州市': ['鹿城区', '龙湾区', '瓯海区', '洞头区', '永嘉县', '平阳县', '苍南县', '文成县', '泰顺县', '瑞安市', '乐清市']
+                }
+            };
+            
+            const provinceSelect = document.getElementById('province');
+            const citySelect = document.getElementById('city');
+            const districtSelect = document.getElementById('district');
+            
+            // 省份变化事件
+            provinceSelect.addEventListener('change', function() {
+                const province = this.value;
+                citySelect.innerHTML = '<option value="">请选择</option>';
+                districtSelect.innerHTML = '<option value="">请选择</option>';
+                
+                if (province && regionData[province]) {
+                    const cities = Object.keys(regionData[province]);
+                    cities.forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city;
+                        option.textContent = city;
+                        citySelect.appendChild(option);
+                    });
+                }
+            });
+            
+            // 城市变化事件
+            citySelect.addEventListener('change', function() {
+                const province = provinceSelect.value;
+                const city = this.value;
+                districtSelect.innerHTML = '<option value="">请选择</option>';
+                
+                if (province && city && regionData[province] && regionData[province][city]) {
+                    const districts = regionData[province][city];
+                    districts.forEach(district => {
+                        const option = document.createElement('option');
+                        option.value = district;
+                        option.textContent = district;
+                        districtSelect.appendChild(option);
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html> 

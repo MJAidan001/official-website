@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>结算页 - 太一科技</title>
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-black text-white overflow-x-hidden">
+    <!-- 导航栏 -->
+    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    太一科技
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="hover:text-blue-400 transition-all duration-300">首页</a>
+                    <a href="products.html" class="hover:text-blue-400 transition-all duration-300">产品商城</a>
+                    <a href="index.html#contact" class="hover:text-blue-400 transition-all duration-300">联系我们</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="pt-24 pb-4 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <nav class="flex items-center space-x-2 text-sm text-gray-400">
+                <a href="index.html" class="hover:text-blue-400 transition-colors">首页</a>
+                <i class="fas fa-chevron-right text-xs"></i>
+                <a href="product-detail.html" class="hover:text-blue-400 transition-colors">产品详情</a>
+                <i class="fas fa-chevron-right text-xs"></i>
+                <span class="text-white">结算页</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- 结算页面主内容 -->
+    <section class="py-16 bg-gradient-to-b from-gray-900 via-black to-gray-900 relative">
+        <div class="container mx-auto px-6 relative z-10">
+            
+            <!-- 页面标题 -->
+            <div class="text-center mb-12 fade-in">
+                <h1 class="text-4xl font-bold text-white mb-4">确认订单</h1>
+                <div class="flex justify-center items-center space-x-4 text-sm">
+                    <div class="flex items-center text-blue-400">
+                        <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-2">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        选择商品
+                    </div>
+                    <div class="w-12 h-0.5 bg-blue-500"></div>
+                    <div class="flex items-center text-blue-400">
+                        <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-2">
+                            <span class="text-xs font-bold">2</span>
+                        </div>
+                        确认订单
+                    </div>
+                    <div class="w-12 h-0.5 bg-gray-600"></div>
+                    <div class="flex items-center text-gray-400">
+                        <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center mr-2">
+                            <span class="text-xs font-bold">3</span>
+                        </div>
+                        完成支付
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                
+                <!-- 左侧：收货信息和商品详情 -->
+                <div class="lg:col-span-2 space-y-8">
+                    
+                    <!-- 收货地址 -->
+                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700 fade-in">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-bold text-white flex items-center">
+                                <i class="fas fa-map-marker-alt mr-3 text-blue-400"></i>
+                                收货地址
+                            </h3>
+                            <button id="addAddressBtn" class="text-blue-400 hover:text-blue-300 transition-colors">
+                                <i class="fas fa-plus mr-1"></i>新增地址
+                            </button>
+                        </div>
+                        
+                        <div id="addressList" class="space-y-4">
+                            <!-- 默认地址 -->
+                            <div class="address-item active border-2 border-blue-500 bg-blue-500/10 rounded-lg p-4 cursor-pointer transition-all duration-300" data-id="default">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <div class="flex items-center mb-2">
+                                            <span class="font-semibold text-white mr-3">张三</span>
+                                            <span class="text-gray-300">173****0587</span>
+                                            <span class="bg-red-500 text-white text-xs px-2 py-1 rounded-full ml-3">默认</span>
+                                        </div>
+                                        <p class="text-gray-300 text-sm leading-relaxed">
+                                            江苏省常州市武进区太湖时代34号 1731524717015871359307@qq.com
+                                        </p>
+                                    </div>
+                                    <div class="flex space-x-2 ml-4">
+                                        <button class="text-blue-400 hover:text-blue-300 text-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-red-400 hover:text-red-300 text-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 其他地址 -->
+                            <div class="address-item border-2 border-gray-600 bg-gray-700/30 rounded-lg p-4 cursor-pointer hover:border-gray-500 transition-all duration-300" data-id="office">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <div class="flex items-center mb-2">
+                                            <span class="font-semibold text-white mr-3">张三</span>
+                                            <span class="text-gray-300">173****0587</span>
+                                        </div>
+                                        <p class="text-gray-300 text-sm leading-relaxed">
+                                            上海市普陀区科技创新园A座15楼太一科技
+                                        </p>
+                                    </div>
+                                    <div class="flex space-x-2 ml-4">
+                                        <button class="text-blue-400 hover:text-blue-300 text-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-red-400 hover:text-red-300 text-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 商品信息 -->
+                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700 fade-in">
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                            <i class="fas fa-shopping-bag mr-3 text-purple-400"></i>
+                            商品详情
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4 p-4 bg-gray-700/30 rounded-lg">
+                                <img id="productImage" src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=150&q=80" 
+                                     alt="本源核" class="w-20 h-20 object-cover rounded-lg bg-white p-2">
+                                <div class="flex-1">
+                                    <h4 id="productName" class="font-semibold text-white mb-1">本源核</h4>
+                                    <p id="productDesc" class="text-gray-400 text-sm mb-2">UTON 声音传感器</p>
+                                    <div class="flex items-center space-x-4 text-sm">
+                                        <span class="text-gray-300">颜色：<span id="productColor" class="text-blue-400">蓝色</span></span>
+                                        <span class="text-gray-300">数量：<span id="productQuantity" class="text-white font-semibold">1</span></span>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-lg font-bold text-red-500">¥<span id="productPrice">12.00</span></div>
+                                    <div class="text-sm text-gray-400 line-through">¥<span id="originalPrice">15.00</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 配送方式 -->
+                        <div class="mt-6 pt-6 border-t border-gray-600">
+                            <h4 class="font-semibold text-white mb-4">配送方式</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center p-3 bg-gray-700/30 rounded-lg cursor-pointer hover:bg-gray-700/50 transition-all">
+                                    <input type="radio" name="shipping" value="express" checked class="mr-3 text-blue-500">
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-medium">顺丰速运</span>
+                                            <span class="text-green-400 font-semibold">免运费</span>
+                                        </div>
+                                        <p class="text-sm text-gray-400">预计1-2个工作日送达</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-center p-3 bg-gray-700/30 rounded-lg cursor-pointer hover:bg-gray-700/50 transition-all">
+                                    <input type="radio" name="shipping" value="standard" class="mr-3 text-blue-500">
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-medium">标准快递</span>
+                                            <span class="text-gray-300">¥6.00</span>
+                                        </div>
+                                        <p class="text-sm text-gray-400">预计3-5个工作日送达</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 发票信息 -->
+                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700 fade-in">
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                            <i class="fas fa-receipt mr-3 text-green-400"></i>
+                            发票信息
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex space-x-4">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="invoice" value="none" checked class="mr-2">
+                                    <span>不开发票</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="invoice" value="personal" class="mr-2">
+                                    <span>个人发票</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="invoice" value="company" class="mr-2">
+                                    <span>企业发票</span>
+                                </label>
+                            </div>
+                            
+                            <div id="invoiceDetails" class="hidden">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-300 mb-2">发票抬头</label>
+                                        <input type="text" id="invoiceTitle" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-300 mb-2">纳税人识别号</label>
+                                        <input type="text" id="taxNumber" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-500">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧：订单总结 -->
+                <div class="lg:col-span-1">
+                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700 sticky top-24 fade-in">
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                            <i class="fas fa-calculator mr-3 text-yellow-400"></i>
+                            订单总结
+                        </h3>
+                        
+                        <div class="space-y-4 mb-6">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-300">商品金额</span>
+                                <span class="text-white font-semibold">¥<span id="subtotal">12.00</span></span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-300">运费</span>
+                                <span class="text-white font-semibold" id="shippingFee">免运费</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-300">优惠券折扣</span>
+                                <span class="text-green-400 font-semibold">-¥<span id="discount">0.00</span></span>
+                            </div>
+                            <div class="border-t border-gray-600 pt-4">
+                                <div class="flex justify-between items-center text-lg">
+                                    <span class="font-bold text-white">应付总额</span>
+                                    <span class="font-bold text-red-500 text-xl">¥<span id="totalAmount">12.00</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 优惠券 -->
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="font-semibold text-white">优惠券</span>
+                                <span class="text-blue-400 text-sm cursor-pointer" id="selectCoupon">选择优惠券</span>
+                            </div>
+                            <div id="selectedCoupon" class="hidden p-3 bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/30 rounded-lg">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="text-sm font-semibold text-white">新用户专享券</div>
+                                        <div class="text-xs text-gray-300">满10元减3元</div>
+                                    </div>
+                                    <button class="text-red-400 hover:text-red-300" id="removeCoupon">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 支付方式 -->
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-white mb-4">支付方式</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center p-3 bg-gray-700/30 rounded-lg cursor-pointer hover:bg-gray-700/50 transition-all">
+                                    <input type="radio" name="payment" value="wechat" checked class="mr-3">
+                                    <i class="fab fa-weixin text-green-500 text-xl mr-3"></i>
+                                    <span>微信支付</span>
+                                </label>
+                                <label class="flex items-center p-3 bg-gray-700/30 rounded-lg cursor-pointer hover:bg-gray-700/50 transition-all">
+                                    <input type="radio" name="payment" value="alipay" class="mr-3">
+                                    <i class="fab fa-alipay text-blue-500 text-xl mr-3"></i>
+                                    <span>支付宝</span>
+                                </label>
+                                <label class="flex items-center p-3 bg-gray-700/30 rounded-lg cursor-pointer hover:bg-gray-700/50 transition-all">
+                                    <input type="radio" name="payment" value="bank" class="mr-3">
+                                    <i class="fas fa-credit-card text-purple-500 text-xl mr-3"></i>
+                                    <span>银行卡支付</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- 立即支付按钮 -->
+                        <button id="submitOrder" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 glow-button mb-4">
+                            <i class="fas fa-lock mr-2"></i>立即支付 ¥<span id="finalAmount">12.00</span>
+                        </button>
+                        
+                        <!-- 安全提示 -->
+                        <!-- <div class="text-center">
+                            <div class="flex justify-center items-center space-x-4 text-xs text-gray-400 mb-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-shield-alt mr-1 text-green-400"></i>
+                                    安全支付
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock mr-1 text-blue-400"></i>
+                                    7天退换
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-500">
+                                点击"立即支付"表示您同意
+                                <a href="#" class="text-blue-400 hover:text-blue-300">《服务条款》</a>
+                                和
+                                <a href="#" class="text-blue-400 hover:text-blue-300">《隐私政策》</a>
+                            </p>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 优惠券弹窗 -->
+    <div id="couponModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-gray-800 rounded-2xl p-6 w-full max-w-md border border-gray-700">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-bold text-white">选择优惠券</h3>
+                    <button id="closeCouponModal" class="text-gray-400 hover:text-white">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-3 max-h-96 overflow-y-auto">
+                    <div class="coupon-item p-4 bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/30 rounded-lg cursor-pointer hover:border-red-400/50 transition-all" data-discount="3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">新用户专享券</div>
+                                <div class="text-sm text-gray-300">满10元减3元</div>
+                                <div class="text-xs text-gray-400">有效期至2025-02-28</div>
+                            </div>
+                            <div class="text-2xl font-bold text-red-400">¥3</div>
+                        </div>
+                    </div>
+                    
+                    <div class="coupon-item p-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 rounded-lg cursor-pointer hover:border-blue-400/50 transition-all" data-discount="5">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">限时特惠券</div>
+                                <div class="text-sm text-gray-300">满50元减5元</div>
+                                <div class="text-xs text-gray-400">有效期至2025-01-31</div>
+                            </div>
+                            <div class="text-2xl font-bold text-blue-400">¥5</div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-4 bg-gray-700/30 border border-gray-600 rounded-lg opacity-50">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-gray-400">VIP专享券</div>
+                                <div class="text-sm text-gray-500">满100元减10元</div>
+                                <div class="text-xs text-gray-500">未达到使用条件</div>
+                            </div>
+                            <div class="text-2xl font-bold text-gray-500">¥10</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="py-16 bg-gradient-to-b from-gray-900 to-black border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <div class="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    太一科技
+                </div>
+                <p class="text-gray-400 mb-6">
+                    致力于通过技术创新让AI从"高性能的工具"升级为"有情感的伙伴"。
+                </p>
+                <p class="text-gray-400">
+                    © 2025 上海太一智枢科技发展有限公司. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 自定义脚本 -->
+    <script src="script.js"></script>
+    <script>
+        // 结算页面专用脚本
+        document.addEventListener('DOMContentLoaded', function() {
+            initCheckoutPage();
+        });
+
+        function initCheckoutPage() {
+            // 从URL参数或localStorage获取商品信息
+            loadProductInfo();
+            
+            // 初始化地址选择
+            initAddressSelection();
+            
+            // 初始化配送方式选择
+            initShippingSelection();
+            
+            // 初始化发票选项
+            initInvoiceOptions();
+            
+            // 初始化优惠券功能
+            initCouponSelection();
+            
+            // 初始化订单提交
+            initOrderSubmission();
+            
+            // 计算总价
+            calculateTotalAmount();
+        }
+
+        // 加载商品信息
+        function loadProductInfo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // 获取基本商品信息
+            const productData = {
+                name: urlParams.get('name') || '本源核',
+                price: parseFloat(urlParams.get('price')) || 12.00,
+                quantity: parseInt(urlParams.get('quantity')) || 1,
+                color: urlParams.get('color') || '蓝色',
+                image: urlParams.get('image') || 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=150&q=80'
+            };
+            
+            // 获取来源信息
+            const source = urlParams.get('source'); // 'payment', 'repurchase', 'reorder'
+            const orderId = urlParams.get('orderId');
+            const originalOrderId = urlParams.get('originalOrderId');
+            const mode = urlParams.get('mode'); // 'payment' 表示付款模式
+            
+            // 根据来源调整页面显示
+            if (source === 'payment' && mode === 'payment') {
+                // 付款模式：修改页面标题和进度条
+                document.querySelector('h1').textContent = '订单付款';
+                updateProgressSteps('payment', orderId);
+            } else if (source === 'repurchase') {
+                // 再次购买模式
+                document.querySelector('h1').textContent = '再次购买';
+                updateProgressSteps('repurchase');
+            } else if (source === 'reorder') {
+                // 重新下单模式
+                document.querySelector('h1').textContent = '重新下单';
+                updateProgressSteps('reorder');
+            }
+
+            // 更新页面显示
+            document.getElementById('productName').textContent = productData.name;
+            document.getElementById('productColor').textContent = productData.color;
+            document.getElementById('productQuantity').textContent = productData.quantity;
+            document.getElementById('productPrice').textContent = productData.price.toFixed(2);
+            document.getElementById('productImage').src = productData.image;
+
+            // 计算小计
+            const subtotal = productData.price * productData.quantity;
+            document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+        }
+        
+        // 更新进度条步骤
+        function updateProgressSteps(mode, orderId = null) {
+            const progressContainer = document.querySelector('.flex.justify-center.items-center.space-x-4');
+            
+            if (mode === 'payment') {
+                // 付款模式：显示订单信息
+                progressContainer.innerHTML = `
+                    <div class="flex items-center text-green-400">
+                        <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-2">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        订单生成
+                    </div>
+                    <div class="w-12 h-0.5 bg-green-500"></div>
+                    <div class="flex items-center text-blue-400">
+                        <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-2">
+                            <span class="text-xs font-bold">2</span>
+                        </div>
+                        订单付款
+                    </div>
+                    <div class="w-12 h-0.5 bg-gray-600"></div>
+                    <div class="flex items-center text-gray-400">
+                        <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center mr-2">
+                            <span class="text-xs font-bold">3</span>
+                        </div>
+                        完成支付
+                    </div>
+                `;
+                
+                // 添加订单号显示
+                if (orderId) {
+                    const orderInfo = document.createElement('div');
+                    orderInfo.className = 'text-center mt-4';
+                    orderInfo.innerHTML = `
+                        <p class="text-gray-400 text-sm">
+                            订单号：<span class="text-blue-400 font-mono">${orderId}</span>
+                        </p>
+                    `;
+                    progressContainer.parentNode.appendChild(orderInfo);
+                }
+            } else if (mode === 'repurchase') {
+                // 再次购买模式
+                progressContainer.innerHTML = `
+                    <div class="flex items-center text-blue-400">
+                        <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-2">
+                            <i class="fas fa-redo text-xs"></i>
+                        </div>
+                        再次购买
+                    </div>
+                    <div class="w-12 h-0.5 bg-blue-500"></div>
+                    <div class="flex items-center text-blue-400">
+                        <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-2">
+                            <span class="text-xs font-bold">2</span>
+                        </div>
+                        确认订单
+                    </div>
+                    <div class="w-12 h-0.5 bg-gray-600"></div>
+                    <div class="flex items-center text-gray-400">
+                        <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center mr-2">
+                            <span class="text-xs font-bold">3</span>
+                        </div>
+                        完成支付
+                    </div>
+                `;
+            } else if (mode === 'reorder') {
+                // 重新下单模式
+                progressContainer.innerHTML = `
+                    <div class="flex items-center text-orange-400">
+                        <div class="w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center mr-2">
+                            <i class="fas fa-refresh text-xs"></i>
+                        </div>
+                        重新下单
+                    </div>
+                    <div class="w-12 h-0.5 bg-orange-500"></div>
+                    <div class="flex items-center text-blue-400">
+                        <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-2">
+                            <span class="text-xs font-bold">2</span>
+                        </div>
+                        确认订单
+                    </div>
+                    <div class="w-12 h-0.5 bg-gray-600"></div>
+                    <div class="flex items-center text-gray-400">
+                        <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center mr-2">
+                            <span class="text-xs font-bold">3</span>
+                        </div>
+                        完成支付
+                    </div>
+                `;
+            }
+        }
+
+        // 地址选择功能
+        function initAddressSelection() {
+            const addressItems = document.querySelectorAll('.address-item');
+            
+            addressItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // 移除所有active状态
+                    addressItems.forEach(addr => {
+                        addr.classList.remove('active', 'border-blue-500', 'bg-blue-500/10');
+                        addr.classList.add('border-gray-600', 'bg-gray-700/30');
+                    });
+                    
+                    // 添加当前选中状态
+                    this.classList.add('active', 'border-blue-500', 'bg-blue-500/10');
+                    this.classList.remove('border-gray-600', 'bg-gray-700/30');
+                });
+            });
+        }
+
+        // 配送方式选择
+        function initShippingSelection() {
+            const shippingOptions = document.querySelectorAll('input[name="shipping"]');
+            
+            shippingOptions.forEach(option => {
+                option.addEventListener('change', function() {
+                    calculateTotalAmount();
+                });
+            });
+        }
+
+        // 发票选项
+        function initInvoiceOptions() {
+            const invoiceOptions = document.querySelectorAll('input[name="invoice"]');
+            const invoiceDetails = document.getElementById('invoiceDetails');
+            
+            invoiceOptions.forEach(option => {
+                option.addEventListener('change', function() {
+                    if (this.value === 'personal' || this.value === 'company') {
+                        invoiceDetails.classList.remove('hidden');
+                    } else {
+                        invoiceDetails.classList.add('hidden');
+                    }
+                });
+            });
+        }
+
+        // 优惠券选择功能
+        function initCouponSelection() {
+            const selectCouponBtn = document.getElementById('selectCoupon');
+            const couponModal = document.getElementById('couponModal');
+            const closeCouponModal = document.getElementById('closeCouponModal');
+            const couponItems = document.querySelectorAll('.coupon-item');
+            const selectedCoupon = document.getElementById('selectedCoupon');
+            const removeCouponBtn = document.getElementById('removeCoupon');
+
+            // 打开优惠券弹窗
+            selectCouponBtn.addEventListener('click', function() {
+                couponModal.classList.remove('hidden');
+            });
+
+            // 关闭优惠券弹窗
+            closeCouponModal.addEventListener('click', function() {
+                couponModal.classList.add('hidden');
+            });
+
+            // 点击背景关闭弹窗
+            couponModal.addEventListener('click', function(e) {
+                if (e.target === couponModal) {
+                    couponModal.classList.add('hidden');
+                }
+            });
+
+            // 选择优惠券
+            couponItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const discount = parseFloat(this.dataset.discount);
+                    const subtotal = parseFloat(document.getElementById('subtotal').textContent);
+                    
+                    // 检查使用条件
+                    if ((discount === 3 && subtotal >= 10) || (discount === 5 && subtotal >= 50)) {
+                        document.getElementById('discount').textContent = discount.toFixed(2);
+                        selectedCoupon.classList.remove('hidden');
+                        selectCouponBtn.textContent = '已选择优惠券';
+                        couponModal.classList.add('hidden');
+                        calculateTotalAmount();
+                    } else {
+                        if (typeof showNotification === 'function') {
+                            showNotification('未满足优惠券使用条件', 'error');
+                        }
+                    }
+                });
+            });
+
+            // 移除优惠券
+            removeCouponBtn.addEventListener('click', function() {
+                document.getElementById('discount').textContent = '0.00';
+                selectedCoupon.classList.add('hidden');
+                selectCouponBtn.textContent = '选择优惠券';
+                calculateTotalAmount();
+            });
+        }
+
+        // 计算总金额
+        function calculateTotalAmount() {
+            const subtotal = parseFloat(document.getElementById('subtotal').textContent);
+            const discount = parseFloat(document.getElementById('discount').textContent);
+            
+            // 获取运费
+            const selectedShipping = document.querySelector('input[name="shipping"]:checked');
+            let shippingCost = 0;
+            let shippingText = '免运费';
+            
+            if (selectedShipping && selectedShipping.value === 'standard') {
+                shippingCost = 6.00;
+                shippingText = '¥6.00';
+            }
+            
+            document.getElementById('shippingFee').textContent = shippingText;
+            
+            const totalAmount = subtotal + shippingCost - discount;
+            document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
+            document.getElementById('finalAmount').textContent = totalAmount.toFixed(2);
+        }
+
+        // 订单提交
+        function initOrderSubmission() {
+            const submitOrderBtn = document.getElementById('submitOrder');
+            
+            submitOrderBtn.addEventListener('click', function() {
+                // 验证必填信息
+                const selectedAddress = document.querySelector('.address-item.active');
+                const selectedPayment = document.querySelector('input[name="payment"]:checked');
+                
+                if (!selectedAddress) {
+                    if (typeof showNotification === 'function') {
+                        showNotification('请选择收货地址', 'error');
+                    }
+                    return;
+                }
+                
+                if (!selectedPayment) {
+                    if (typeof showNotification === 'function') {
+                        showNotification('请选择支付方式', 'error');
+                    }
+                    return;
+                }
+                
+                // 显示支付确认
+                const totalAmount = document.getElementById('finalAmount').textContent;
+                if (confirm(`确认支付 ¥${totalAmount} 吗？`)) {
+                    // 模拟支付过程
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>支付中...';
+                    this.disabled = true;
+                    
+                    setTimeout(() => {
+                        if (typeof showNotification === 'function') {
+                            showNotification('支付成功！订单已提交', 'success');
+                        }
+                        
+                        setTimeout(() => {
+                            // 跳转到订单成功页面
+                            window.location.href = 'order-success.html';
+                        }, 1500);
+                    }, 2000);
+                }
+            });
+        }
+    </script>
+</body>
+</html> 

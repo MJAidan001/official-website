@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能硬件商城 - 太一科技</title>
+    <meta name="description" content="太一科技智能硬件商城 - 情感化AI技术与智能硬件的完美融合">
+    <meta name="keywords" content="智能硬件,智能穿戴,情感计算,AI设备,太一科技">
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-black text-white overflow-x-hidden">
+    <!-- 滚动进度条 -->
+    <div class="scroll-progress"></div>
+    
+    <!-- 回到顶部按钮 -->
+    <button class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- 顶部用户栏 -->
+    <div class="fixed w-full z-50 bg-black/60 backdrop-blur-sm border-b border-gray-800/30">
+        <div class="container mx-auto px-6 py-2">
+            <div class="flex items-center justify-between text-sm">
+                <div class="flex items-center space-x-4 text-gray-400 hidden-mobile hidden md:flex">
+                    <span><i class="fas fa-phone mr-1"></i>021-6688-8888</span>
+                    <span><i class="fas fa-envelope mr-1"></i>contact@taiyi-tech.com</span>
+                </div>
+                <div class="flex items-center space-x-4 md:ml-auto">
+                    <!-- 未登录状态 -->
+                    <div id="userNotLoggedIn" class="flex items-center space-x-4">
+                        <a href="login.html" class="text-gray-300 hover:text-blue-400 transition-colors">
+                            <i class="fas fa-sign-in-alt mr-1"></i>登录
+                        </a>
+                        <a href="register.html" class="px-4 py-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-white text-xs hover:from-blue-600 hover:to-purple-700 transition-all">
+                            注册
+                        </a>
+                    </div>
+                    <!-- 已登录状态 -->
+                    <div id="userLoggedIn" class="hidden flex items-center space-x-4">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-white text-xs"></i>
+                            </div>
+                            <span class="text-gray-300" id="userName">用户名</span>
+                        </div>
+                        <div class="relative group">
+                            <button class="text-gray-300 hover:text-blue-400 transition-colors">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="absolute right-0 top-full mt-2 w-48 bg-gray-800 border border-gray-700 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                                <a href="#" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors">
+                                    <i class="fas fa-user mr-2"></i>个人中心
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors">
+                                    <i class="fas fa-shopping-cart mr-2"></i>我的订单
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors">
+                                    <i class="fas fa-heart mr-2"></i>收藏夹
+                                </a>
+                                <hr class="border-gray-700 my-1">
+                                <a href="#" id="logoutBtn" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>退出登录
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主导航栏 -->
+    <nav class="fixed w-full z-40 bg-black/80 backdrop-blur-xl border-b border-gray-800/50 transition-all duration-300" style="top: 32px;">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-brain text-white text-xl"></i>
+                    </div>
+                    <div class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        太一科技
+                    </div>
+                </a>
+                <div class="hidden lg:flex space-x-8">
+                    <a href="index.html" class="nav-link relative group">
+                        <span>首页</span>
+                        <span class="nav-underline"></span>
+                    </a>
+                    <a href="products.html" class="nav-link relative group text-blue-400">
+                        <span>智能硬件</span>
+                        <span class="nav-underline"></span>
+                    </a>
+                </div>
+                <div class="lg:hidden">
+                    <button class="mobile-menu-btn text-white hover:text-blue-400 transition-colors">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div class="mobile-menu hidden lg:hidden bg-black/95 backdrop-blur-xl border-t border-gray-800">
+            <div class="container mx-auto px-6 py-6">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-white hover:text-blue-400 transition-colors py-2">首页</a>
+                    <a href="products.html" class="text-white hover:text-blue-400 transition-colors py-2">智能硬件</a>
+                    <hr class="border-gray-700 my-2">
+                    <div id="mobileUserMenu">
+                        <!-- 移动端用户菜单将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面头部 -->
+    <section class="pt-32 pb-16 bg-gradient-to-b from-gray-900 to-black relative" style="padding-top: 120px;">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-5"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                    智能<span class="text-gradient">硬件商城</span>
+                </h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    情感化AI技术与智能硬件的完美融合，让科技更懂你的心
+                </p>
+            </div>
+            
+            <!-- 搜索和筛选区域 -->
+            <div class="max-w-6xl mx-auto">
+                <div class="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50">
+                    <!-- 搜索框 -->
+                    <div class="mb-8">
+                        <div class="relative max-w-2xl mx-auto">
+                            <input type="text" id="searchInput" placeholder="搜索智能硬件产品..." 
+                                   class="w-full px-6 py-4 bg-gray-700/50 border border-gray-600 rounded-full text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all">
+                            <button class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-400 transition-colors">
+                                <i class="fas fa-search text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 筛选按钮 -->
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button class="filter-btn active" data-category="all">
+                            <i class="fas fa-th-large mr-2"></i>
+                            <span>全部商品</span>
+                        </button>
+                        <button class="filter-btn" data-category="wearable">
+                            <i class="fas fa-watch mr-2"></i>
+                            <span>智能穿戴</span>
+                        </button>
+                        <button class="filter-btn" data-category="health">
+                            <i class="fas fa-heartbeat mr-2"></i>
+                            <span>健康监测</span>
+                        </button>
+                        <button class="filter-btn" data-category="entertainment">
+                            <i class="fas fa-music mr-2"></i>
+                            <span>娱乐体验</span>
+                        </button>
+                        <button class="filter-btn" data-category="professional">
+                            <i class="fas fa-cogs mr-2"></i>
+                            <span>专业设备</span>
+                        </button>
+                        <button class="filter-btn" data-category="fashion">
+                            <i class="fas fa-gem mr-2"></i>
+                            <span>时尚科技</span>
+                        </button>
+                    </div>
+                    
+                    <!-- 排序选项 -->
+                    <div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-700">
+                        <div class="flex items-center space-x-4">
+                            <span class="text-gray-400">排序方式:</span>
+                            <select id="sortSelect" class="bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
+                                <option value="default">默认排序</option>
+                                <option value="price-low">价格从低到高</option>
+                                <option value="price-high">价格从高到低</option>
+                                <option value="name">按名称排序</option>
+                                <option value="popular">热门优先</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span class="text-gray-400">显示方式:</span>
+                            <button id="gridView" class="view-btn active">
+                                <i class="fas fa-th-large"></i>
+                            </button>
+                            <button id="listView" class="view-btn">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品展示区域 -->
+    <section class="py-16 bg-black">
+        <div class="container mx-auto px-6">
+            <!-- 产品统计 -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center">
+                    <p class="text-gray-400">
+                        共找到 <span id="productCount" class="text-blue-400 font-semibold">12</span> 款产品
+                    </p>
+                    <div class="flex items-center space-x-4">
+                        <button id="clearFilters" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fas fa-times mr-2"></i>清除筛选
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 产品网格 -->
+            <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- 产品将通过JavaScript动态加载 -->
+            </div>
+            
+            <!-- 加载更多按钮 -->
+            <div class="text-center mt-16">
+                <button id="loadMore" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+                    <span class="mr-3">加载更多产品</span>
+                    <i class="fas fa-arrow-down"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-20 bg-gradient-to-b from-gray-900 to-black border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-brain text-white text-xl"></i>
+                        </div>
+                        <div class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                            太一科技
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-8 leading-relaxed max-w-md">
+                        致力于通过技术创新让AI从"高性能的工具"升级为"有情感的伙伴"，构建更有温度的智能世界。
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold mb-6 text-white">快速链接</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="footer-link">首页</a></li>
+                        <li><a href="products.html" class="footer-link">智能硬件</a></li>
+                        <li><a href="login.html" class="footer-link">登录</a></li>
+                        <li><a href="register.html" class="footer-link">注册</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold mb-6 text-white">联系方式</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-2 text-blue-400"></i>
+                            021-6688-8888
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-blue-400"></i>
+                            contact@taiyi-tech.com
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-16 pt-8 border-t border-gray-800 text-center">
+                <p class="text-gray-400">
+                    © 2025 上海太一智枢科技发展有限公司. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 自定义脚本 -->
+    <script src="script.js"></script>
+    <script src="products.js"></script>
+</body>
+</html> 
